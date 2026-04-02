@@ -80,14 +80,14 @@ public class ConnectionUI : MonoBehaviour
     {
         if (NetworkManager.Singleton == null)
         {
-            Debug.LogError("[ConnectionUI] NetworkManager не найден в сцене!");
+            Debug.LogError("Контроллер не найден в сцене");
             return;
         }
 
         NetworkManager.Singleton.OnClientConnectedCallback += OnClientConnected;
         NetworkManager.Singleton.OnServerStopped += OnServerStopped;
 
-        Debug.Log("[ConnectionUI] Инициализирован успешно");
+        Debug.Log("Контроллер инициализирован");
     }
 
     private void OnDestroy()
@@ -103,26 +103,26 @@ public class ConnectionUI : MonoBehaviour
     {
         if (NetworkManager.Singleton == null)
         {
-            Debug.LogError("[ConnectionUI] NetworkManager не найден!");
+            Debug.LogError("Контроллер не найден");
             return;
         }
 
         SaveNickname();
         NetworkManager.Singleton.StartHost();
-        Debug.Log($"[ConnectionUI] Host запущен. Ник: {PlayerNickname}");
+        Debug.Log($"Хост запущен. Ник хоста: {PlayerNickname}");
     }
 
     public void StartAsClient()
     {
         if (NetworkManager.Singleton == null)
         {
-            Debug.LogError("[ConnectionUI] NetworkManager не найден!");
+            Debug.LogError("Контроллер не найден");
             return;
         }
 
         SaveNickname();
         NetworkManager.Singleton.StartClient();
-        Debug.Log($"[ConnectionUI] Client запущен. Ник: {PlayerNickname}");
+        Debug.Log($"Client запущен. Ник клиента: {PlayerNickname}");
     }
 
     private void SaveNickname()
@@ -134,7 +134,7 @@ public class ConnectionUI : MonoBehaviour
     private void OnClientConnected(ulong clientId)
     {
         IsConnected = true;
-        Debug.Log($"[ConnectionUI] Подключён! ClientID: {clientId}");
+        Debug.Log($"Подключён. ClientID: {clientId}");
 
         if (_menuPanel != null)
             _menuPanel.SetActive(false);
@@ -143,7 +143,7 @@ public class ConnectionUI : MonoBehaviour
     private void OnServerStopped(bool cleanly)
     {
         IsConnected = false;
-        Debug.Log($"[ConnectionUI] Сервер остановлен");
+        Debug.Log($"Сервер остановлен");
 
         if (_menuPanel != null)
             _menuPanel.SetActive(true);
